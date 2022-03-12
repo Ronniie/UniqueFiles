@@ -1,5 +1,5 @@
 """
-UniqueFiles will detect files from two directories, if any file is unique in any of the directories;
+UniqueFiles will detect files from multiple directories, if any file is unique in any of the directories;
 Move the unique files to a new directory.
 """
 
@@ -27,13 +27,18 @@ for directory in directories:
             # Check if the file is unique in the directory
             if file not in os.listdir(directories[i]):
                 # Move file to the output directory
+                # Try to move the file
                 try:
+                    # Move the file to the output directory
                     shutil.move(directory + '/' + file, output)
+                    # Print the file moved
                     print(f"{file} moved to {output} from {directory}")
-                except shutil.Error:
+                except shutil.Error: # If the file already exists
+                    # Print the file already exists
                     print(f"{file} already exists in {output}")
                 break
-            else:
+            else: # If the file is not unique in the directory
+                # Print the file is not unique in the directory
                 print(f"{file} is not unique in {directory}")
 
 # Exit the script
